@@ -8,8 +8,6 @@ class Room:
     def check_in(self, guest):
         if len(self.guests) < self.capacity:
             self.guests.append(guest)
-        else:
-            print("Could not add guest. The room is full.")
     
     def check_out(self, guest):
         self.guests.remove(guest)

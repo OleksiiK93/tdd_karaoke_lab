@@ -9,18 +9,26 @@ class TestRoom(unittest.TestCase):
         self.song_2 = Song('My Generation', 'The Who', 'Rock', 1965)
         self.song_3 = Song('Stand!', 'Sly and the Family Stone', 'Soul', 1969)
         self.guest_1 = Guest('Oleksii', '07756593890')
-        self.room = Room('Woodstock', 3)
+        self.guest_2 = Guest('Ana', '07756593891')
+        self.guest_3 = Guest('Bob', '07756793890')
+        self.room = Room('Woodstock', 2)
 
     
     def test_initialization(self):
         self.assertEqual('Woodstock', self.room.name)
-        self.assertEqual(3, self.room.capacity)
+        self.assertEqual(2, self.room.capacity)
         self.assertEqual(0, len(self.room.songs))
         self.assertEqual(0, len(self.room.guests))
 
     def test_room_can_check_in_guest(self):
         self.room.check_in(self.guest_1)
         self.assertEqual(1, len(self.room.guests))
+
+    def test_room_cannot_add_guests_when_at_capacity(self):
+        self.room.check_in(self.guest_1)
+        self.room.check_in(self.guest_2)
+        self.room.check_in(self.guest_3)
+        self.assertEqual(2, len(self.room.guests))
 
     def test_room_can_check_out_guest(self):
         self.room.check_in(self.guest_1)
