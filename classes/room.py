@@ -13,3 +13,6 @@ class Room:
     
     def check_out(self, guest):
         self.guests.remove(guest)
+    
+    def add_song(self, song):
+        self.songs.add(song)
