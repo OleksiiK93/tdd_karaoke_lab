@@ -8,6 +8,7 @@ class Room:
     
     def check_in(self, guest):
         if len(self.guests) < self.capacity and guest.wallet >= self.fee:
+            guest.check_songs(self)
             guest.pay_fee(self)
             self.guests.append(guest)
     

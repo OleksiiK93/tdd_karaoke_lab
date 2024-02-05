@@ -8,9 +8,9 @@ class TestRoom(unittest.TestCase):
         self.song_1 = Song('White Rabbit', 'Jefferson Airplane', 'Rock', 1967)
         self.song_2 = Song('My Generation', 'The Who', 'Rock', 1965)
         self.song_3 = Song('Stand!', 'Sly and the Family Stone', 'Soul', 1969)
-        self.guest_1 = Guest('Oleksii', '07756593890', 24.00)
-        self.guest_2 = Guest('Ana', '07756593891', 15.0)
-        self.guest_3 = Guest('Bob', '07756793890', 21.50)
+        self.guest_1 = Guest('Oleksii', '07756593890', 24.00, self.song_1)
+        self.guest_2 = Guest('Ana', '07756593891', 15.0, self.song_1)
+        self.guest_3 = Guest('Bob', '07756793890', 21.50, self.song_1)
         self.room = Room('Woodstock', 2, 15.0)
 
     
@@ -40,7 +40,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(1, len(self.room.songs))
     
     def test_room_cannot_check_in_poor_customer(self):
-        poor_customer = Guest("Matt", "99984849", 11.0)
+        poor_customer = Guest("Matt", "99984849", 11.0, self.song_1)
         self.room.check_in(poor_customer)
         self.assertEqual(0, len(self.room.guests))
         self.assertEqual(11.0, poor_customer.wallet)
