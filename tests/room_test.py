@@ -19,6 +19,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(2, self.room.capacity)
         self.assertEqual(0, len(self.room.songs))
         self.assertEqual(0, len(self.room.guests))
+        self.assertEqual(3, len(self.room.drinks))
 
     def test_room_can_check_in_guest(self):
         self.room.check_in(self.guest_1)
@@ -44,3 +45,8 @@ class TestRoom(unittest.TestCase):
         self.room.check_in(poor_customer)
         self.assertEqual(0, len(self.room.guests))
         self.assertEqual(11.0, poor_customer.wallet)
+    
+    def test_room_can_keep_track_of_guests_spending(self):
+        self.room.check_in(self.guest_1)
+        self.guest_1.buy_drink(self.room, 'cola')
+        self.assertEqual(17.0, self.room.get_spending(self.guest_1))

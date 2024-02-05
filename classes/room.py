@@ -5,6 +5,11 @@ class Room:
         self.fee = fee
         self.songs = set()
         self.guests = list()
+        self.drinks = {
+            'gin': 4.0,
+            'whisky': 4.50,
+            'cola': 2.0
+        }
     
     def check_in(self, guest):
         if len(self.guests) < self.capacity and guest.wallet >= self.fee:
@@ -17,3 +22,6 @@ class Room:
     
     def add_song(self, song):
         self.songs.add(song)
+
+    def get_spending(self, guest):
+        return guest.spending
