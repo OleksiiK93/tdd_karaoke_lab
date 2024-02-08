@@ -1,4 +1,6 @@
 import unittest
+from datetime import datetime
+
 from classes.room import Room
 from classes.song import Song
 from classes.guest import Guest
@@ -50,3 +52,13 @@ class TestRoom(unittest.TestCase):
         self.room.check_in(self.guest_1)
         self.guest_1.buy_drink(self.room, 'cola')
         self.assertEqual(17.0, self.room.get_spending(self.guest_1))
+
+    def test_room_can_be_booked(self):
+        self.room.create_booking(self.guest_1, datetime(2024, 2, 9, 19, 0))
+        self.assertEqual(1, len(self.room.bookings))
+
+    def test_room_cannot_be_booked_if_time_unavailable(self):
+        self.room.create_booking(self.guest_1, datetime(2024, 2, 9, 19, 0))
+        self.room.create_booking(self.guest_3, datetime(2024, 2, 9, 19, 30))
+        self.room.create_booking(self.guest_2, datetime(2024, 2, 9, 19, 0))
+        self.assertEqual(2, len(self.room.bookings))        

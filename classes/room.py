@@ -10,12 +10,13 @@ class Room:
             'whisky': 4.50,
             'cola': 2.0
         }
+        self.bookings = dict()
     
     def check_in(self, guest):
         if len(self.guests) < self.capacity and guest.wallet >= self.fee:
             guest.check_songs(self)
             guest.pay_fee(self)
-            self.guests.append(guest)
+            self.guests.append(guest)            
     
     def check_out(self, guest):
         self.guests.remove(guest)
@@ -25,3 +26,7 @@ class Room:
 
     def get_spending(self, guest):
         return guest.spending
+    
+    def create_booking(self, guest, datetime):
+        if datetime not in self.bookings:
+            self.bookings[datetime] = guest
